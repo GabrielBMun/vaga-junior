@@ -1,73 +1,40 @@
-# 🔹 Desafio Técnico Júnior #1 – Cadastro e Consulta de Abastecimentos
+# 🔹 Desafio Técnico Júnior #1 – Cadastro e Consulta de Abastecimentos - Posto Combustível - Sistema de Gerenciamento
 
-## 🛠 Objetivo
+Sistema simples para gerenciamento de combustíveis, bombas e abastecimentos em um posto de combustível, usando Java com JPA/Hibernate e PostgreSQL.
 
-Desenvolver uma aplicação simples em **Java** para cadastro e consulta de abastecimentos em um posto de combustível, com armazenamento em banco de dados e exibição dos dados via **Java Swing** ou **API REST**.
+Como pedido no desafio da vaga, desenvolvi a aplicação o mais bem estruturada possível, cumprindo todos os requisitos e todos (senão quase) os opcionais.
 
----
+## Funcionalidades
 
-## 📌 Funcionalidades Implementadas
+- Cadastro, edição, listagem e exclusão de **Combustíveis**
+- Cadastro, edição, listagem e exclusão de **Bombas** associadas aos combustíveis
+- Cadastro, edição, listagem e exclusão de **Abastecimentos** com controle de data, quantidade e valor total calculado automaticamente
 
-✅ Operaçoes basicas (Criar, Listar, Alterar, Deletar) de **Tipos de Combustível** 
-- Nome - Texto
-- Preço por litro
+## Tecnologias
 
-✅ Operaçoes basicas (Criar, Listar, Alterar, Deletar) de **Bombas de Combustível** (relacionadas a um tipo de combustível)
-- Nome da bomba
-- Combustivel que abastece
+- Java
+- Jakarta Persistence API (JPA) com Hibernate
+    - Utiliza `EntityManagerFactory` para gerenciar conexões com o banco
+    - O mapeamento objeto-relacional lida com a maior parte das consultas automaticamente, sem necessidade de SQL manual
+- PostgreSQL
+- Swing para interface gráfica
+- EntityManagerFramework
 
-✅ Operaçoes basicas (Criar, Listar, Alterar, Deletar)  de **Abastecimentos** (com data, volume abastecido e valor total)
-- Bomba que foi realizado o abastecimento
-- Data do abastecimento
-- Quantidade em valores
-- Litragem
-  
-✅ **Consulta** de todos os dados cadastrados (via Java Swing ou API)  
-✅ Persistência dos dados (ao menos em tempo de execução)  
+## Estrutura do projeto
 
----
+- `model` - entidades JPA que representam as tabelas do banco  
+- `dao` - classes para acesso direto ao banco  
+- `service` - lógica de negócio e controle de transações  
+- `view` - telas Swing para interação com o usuário  
+- `util` - utilitários gerais, como o gerenciador de EntityManager
+- `controller` - as controllers, não desenvolvidas mas posicionadas na estrutura do projeto
 
-## ✅ Requisitos Atendidos
+## Observações
 
-- Projeto Java com estrutura organizada (usando Maven ou Gradle)
-- Relacionamentos entre entidades corretamente implementados
-- Interface gráfica Java Swing **ou** API HTTP para cadastro e consulta
-- Código comentado e organizado
-
----
-
-## 🌟 Diferenciais Implementados
-
-- API RESTful simples com rotas `GET`, `POST`, `PUT`
-- Boas práticas de organização de código (DAO, camada de serviço, etc.)
-- Persistencia dos dados (em caso de restart da aplicação manter os dados)
-- 
----
-
-## 📬 Como entregar o desafio
-
-1. **Faça um fork** deste repositório.
-2. Implemente a solução no seu fork.
-3. Faça commits organizados com mensagens claras.
-4. Após finalizar:
-   - Envie o link do **repositório forkado** com a sua solução.
-   - Certifique-se de que o projeto roda sem erros e que o README está atualizado.
-
----
-## 🔍 O que será avaliado
-
-- Sua **comunicação**, especialmente ao surgir dúvidas ou obstáculos durante o desenvolvimento.
-- **O processo de desenvolvimento** como um todo, e não apenas o resultado final.
-- A clareza e organização dos **commits** realizados.
-- Sua capacidade de **estruturar a solução em etapas**, mesmo que nem todos os requisitos sejam concluídos.
-
----
-
-## 💡 Dicas para se sair bem
-
-- Divida o desafio em **pequenas partes** e implemente **com calma**, focando em cada funcionalidade por vez.
-- Use **commits claros e objetivos**, indicando exatamente o que foi alterado ou implementado.
-- Em caso de dúvida, **comunique-se** — mostrar que você sabe buscar soluções é um ponto positivo.
-- Mesmo que não finalize 100% dos requisitos, **a qualidade do seu processo será levada em conta**.
-
----
+- O banco é atualizado automaticamente com base nas entidades (`hibernate.hbm2ddl.auto=update`).
+- Valores totais de abastecimento são calculados com base no preço do combustível associado à bomba.  
+- Interface desktop simples e funcional, ideal para uso local.
+- As controllers do projeto não desenvolvidas por optar pela visualização via Swing e não por uma API Restful ou similar, achei que seria mais simples uma tela swing básica para "dizer que funciona", os métodos poderiam ser chamados em um endpoint caso necessário, mas não foi uma solução implementada.
+- As telas que abrem ao clicar no botão são modals, não JFrames, bloqueiam o uso da tela anterior até que sejam fechadas.
+- Não progredi muito na estilização do Swing, foi minha primeira vez trabalhando com ele e tentei fazer o mais prático possível e visualmente autoexplicativo.
+- Caso ocorra erros na hora de rodar, por favor me avise! Está funcionando corretamente para mim, talvez o POM dê erro de novo e precise alterar a classe main, mas me avise!
